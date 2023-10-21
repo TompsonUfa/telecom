@@ -1,8 +1,8 @@
 <template>
     <div class="form">
-        <i class="bi bi-search form__icon"></i>
-        <input @input="updateSearch(search)" v-model="search" type="text"
+        <input  v-model="search" type="text"
                class="form-control form__input" placeholder="Поиск...">
+        <i @click="updateSearch(search)" class="bi bi-search form__icon"></i>
     </div>
 </template>
 
@@ -22,14 +22,18 @@
     &__icon {
         position: absolute;
         top: 16px;
-        left: 20px;
+        right: 20px;
         color: #9ca3af;
         font-size: 16px;
+        cursor: pointer;
     }
     &__input {
         height: 55px;
-        text-indent: 33px;
+        text-indent: 10px;
         border-radius: 10px;
+        &:focus{
+            outline: none !important;
+        }
     }
 }
 </style>
