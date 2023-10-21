@@ -31,7 +31,7 @@ class EquipmentRequest extends FormRequest
                 'string',
                 Rule::unique('equipment', 'serial_number')->ignore($id),
                 ],
-            'desc' => ['string'],
+            'desc' => ['nullable', 'string'],
         ];
     }
 }

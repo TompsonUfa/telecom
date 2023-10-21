@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^4.4.0",
+        "bootstrap-icons": "^1.11.1",
         "path": "^0.12.7",
         "sass": "^1.69.4",
         "update": "^0.7.4",

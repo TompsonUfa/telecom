@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\Equipment\EquipmentResource;
+use App\Http\Resources\Equipment\TypeResource;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
@@ -48,7 +49,7 @@ class EquipmentServices
             $validator = Validator::make($equipment, [
                 'equipment_type_id' => ['required', 'exists:equipment_types,id'],
                 'serial_number' => ['required', 'string', 'unique:equipment'],
-                'desc' => ['string'],
+                'desc' => ['nullable', 'string'],
             ]);
 
             if ($validator->fails()) {
@@ -92,7 +93,7 @@ class EquipmentServices
         }
     }
 
-    public function delete($id){
+    public function destroy($id){
         $equipment = Equipment::find($id);
         $equipment->delete();
     }
@@ -110,6 +111,6 @@ class EquipmentServices
 
         $equipmentsTypes = $equipmentsTypes->paginate($perPage, ['*'], 'page', $page);
 
-        return EquipmentResource::collection($equipmentsTypes);
+        return TypeResource::collection($equipmentsTypes);
     }
 }

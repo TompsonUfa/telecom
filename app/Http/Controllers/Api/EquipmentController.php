@@ -15,7 +15,6 @@ class EquipmentController extends Controller
         $q = $request->input('q');
         $page = $request->input('page');
         $perPage = $request->input('per_page');
-
         return $services->index($q, $page, $perPage);
     }
 
@@ -41,12 +40,11 @@ class EquipmentController extends Controller
 
     public function destroy($id, EquipmentServices $services)
     {
-        return $services->delete($id);
+        return $services->destroy($id);
     }
 
     public function type(Request $request, EquipmentServices $services)
     {
-
         $q = $request->input('q');
         $page = $request->input('page');
         $perPage = $request->input('per_page');
