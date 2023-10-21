@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('equipment_type_id');
             $table->foreign('equipment_type_id')->references('id')->on('equipment_types');
-            $table->string('serial_number', 10);
-            $table->text('desc');
+            $table->string('serial_number')->unique();
+            $table->text('desc')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

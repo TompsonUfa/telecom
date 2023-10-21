@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EquipmentRequest extends FormRequest
@@ -11,7 +12,7 @@ class EquipmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,16 @@ class EquipmentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id');
+
         return [
-            //
+            'equipment_type_id' => ['required', 'exists:equipment_types,id'],
+            'serial_number' => [
+                'required',
+                'string',
+                Rule::unique('equipment', 'serial_number')->ignore($id),
+                ],
+            'desc' => ['string'],
         ];
     }
 }
