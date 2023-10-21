@@ -1,7 +1,7 @@
 <template>
     <div class="form">
-        <input  v-model="search" type="text"
-               class="form-control form__input" placeholder="Поиск...">
+        <input v-model="search" type="text"
+               class="form-control form__input" placeholder="Поиск..." @keyup.enter="this.updateSearch(search)">
         <i @click="updateSearch(search)" class="bi bi-search form__icon"></i>
     </div>
 </template>
@@ -31,9 +31,6 @@
         height: 55px;
         text-indent: 10px;
         border-radius: 10px;
-        &:focus{
-            outline: none !important;
-        }
     }
 }
 </style>
