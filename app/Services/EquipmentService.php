@@ -31,20 +31,15 @@ class EquipmentService
         return EquipmentResource::collection($equipments);
     }
 
-    public function show($id){
-        $equipment = Equipment::find($id);
-
-        if($equipment){
-            return new EquipmentResource($equipment);
-        }
-
+    public function show($equipment){
+        return new EquipmentResource($equipment);
     }
 
     public function store($equipments)
     {
         $errors = null;
         $success = null;
-
+        dd($equipments);
         foreach ($equipments as $index => $equipment){
 
             $validator = Validator::make($equipment, [
@@ -76,11 +71,7 @@ class EquipmentService
         return response()->json(['errors' => $errors, 'success' => $success], 200);
     }
 
-    public function update($id, $equipmentTypeId, $serialNumber, $desc){
-        $equipment = Equipment::find($id);
-
-        if ($equipment) {
-
+    public function update($equipment, $equipmentTypeId, $serialNumber, $desc){
             $equipment->update([
                 'equipment_type_id' => $equipmentTypeId,
                 'serial_number' => $serialNumber,
@@ -90,12 +81,9 @@ class EquipmentService
             $equipment = $equipment->fresh();
 
             return new EquipmentResource($equipment);
-
-        }
     }
 
-    public function destroy($id){
-        $equipment = Equipment::find($id);
+    public function destroy($equipment){
         $equipment->delete();
     }
 

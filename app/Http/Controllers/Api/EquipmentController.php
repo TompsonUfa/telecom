@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EquipmentRequest;
+use App\Models\Equipment;
 use App\Services\EquipmentService;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,9 @@ class EquipmentController extends Controller
         return $services->index($q, $page, $perPage);
     }
 
-    public function show($id, EquipmentService $services)
+    public function show(Equipment $equipment, EquipmentService $services)
     {
-        return $services->show($id);
+        return $services->show($equipment);
     }
 
     public function store(Request $request, EquipmentService $services)
@@ -29,18 +30,18 @@ class EquipmentController extends Controller
         return $services->store($equipments);
     }
 
-    public function update($id, EquipmentRequest $request, EquipmentService $services)
+    public function update(Equipment $equipment, EquipmentRequest $request, EquipmentService $services)
     {
         $equipmentTypeId = $request->input('equipment_type_id');
         $serialNumber = $request->input('serial_number');
         $desc = $request->input('desc');
 
-        return $services->update($id, $equipmentTypeId, $serialNumber, $desc);
+        return $services->update($equipment, $equipmentTypeId, $serialNumber, $desc);
     }
 
-    public function destroy($id, EquipmentService $services)
+    public function destroy(Equipment $equipment, EquipmentService $services)
     {
-        return $services->destroy($id);
+        return $services->destroy($equipment);
     }
 
     public function type(Request $request, EquipmentService $services)
