@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\Equipment\EquipmentResource;
-use App\Http\Resources\Equipment\TypeResource;
+use App\Http\Resources\Equipment\EquipmentTypeResource;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
@@ -112,6 +112,6 @@ class EquipmentService
 
         $equipmentsTypes = $equipmentsTypes->paginate($perPage, ['*'], 'page', $page);
 
-        return TypeResource::collection($equipmentsTypes);
+        return EquipmentTypeResource::collection($equipmentsTypes);
     }
 }
