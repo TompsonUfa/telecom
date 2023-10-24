@@ -8,14 +8,14 @@
         </div>
         <div class="col-12">
             <div class="table-wrap">
-                <table-equipment @showModalEdit="showModalEdit" @showModalRemove="showModalRemove"></table-equipment>
+                <table-equipment @showModalEdit="showModalEdit"></table-equipment>
             </div>
         </div>
         <div class="col-12">
             <pagination-equipment></pagination-equipment>
         </div>
     </div>
-    <modal-edit :item="selectedItem" :editModal="editModal" ></modal-edit>
+    <modal-edit :editModal="editModal" ></modal-edit>
 </template>
 
 <script>
@@ -37,13 +37,12 @@ export default {
         return{
             search: "",
             editModal: null,
-            selectedItem: null,
         }
     },
     methods: {
-        ...mapActions(['getEquipments']),
+        ...mapActions(['getEquipments', 'select']),
         showModalEdit(item){
-            this.selectedItem = item;
+            this.select(item);
             this.editModal.toggle();
         },
     },

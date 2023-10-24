@@ -32,7 +32,7 @@ export default {
         },
         createEquipment(ctx, data){
             axios
-                .post('/api/equipment', {"equipments": {data}})
+                .post('/api/equipment', {"equipments": data})
                 .then(res => {
                     ctx.commit('updateMessage', res.data)
                 })
@@ -41,9 +41,9 @@ export default {
                 })
         },
         editEquipment(ctx, [data, id]){
-            const newType = data['equipment_type_id'];
-            const newNumber = data['serial_number'];
-            const newDesc = data['desc'];
+            const newType = data.equipment_type.id;
+            const newNumber = data.serial_number;
+            const newDesc = data.desc;
             axios
                 .put('/api/equipment/' + id, {
                     equipment_type_id: newType,
@@ -71,6 +71,9 @@ export default {
         updateSearch(ctx, data) {
             ctx.commit('updateSearch', data)
             ctx.dispatch('getEquipments', [1, data]);
+        },
+        select(ctx, data){
+            ctx.commit('updateSelected', data)
         }
     },
     mutations: {
@@ -79,6 +82,9 @@ export default {
         },
         updateEquipments(state, data){
             state.equipments = data;
+        },
+        updateSelected(state,data){
+            state.selected = data;
         },
         updatePagination(state, data){
             state.pagination = data;
@@ -90,6 +96,7 @@ export default {
     state: {
         search: [],
         equipments: [],
+        selected: [],
         pagination: [],
         types: [],
     },
@@ -99,6 +106,9 @@ export default {
         },
         equipments(state){
             return state.equipments;
+        },
+        selected(state){
+           return state.selected;
         },
         pagination(state){
             return state.pagination;

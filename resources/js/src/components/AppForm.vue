@@ -3,7 +3,7 @@
         <div class="form-floating mb-3">
             <select class="form-select" id="floatingSelect" v-model="form.type" :class="validatedClass('type')">
                 <option disabled value="">Пожалуйста, выберите один из них</option>
-                <option v-for="type in types" :key="type.id" :value=type.id>{{type.name}}</option>
+                <option v-for="type in types" :key="type.id" :value=type>{{type.name}}</option>
             </select>
             <label for="floatingSelect">Тип оборудования</label>
         </div>
@@ -40,19 +40,8 @@ export default {
             },
         }
     },
-    props: {
-      item: Object,
-    },
-    watch: {
-      item(newVal, oldVal){
-          this.form.id =  newVal.id;
-          this.form.type = newVal.equipment_type.id;
-          this.form.number = newVal.serial_number;
-          this.form.desc = newVal.desc;
-      }
-    },
     computed: {
-        ...mapGetters(['types']),
+        ...mapGetters(['types', 'selected']),
         validatedClass(){
             return (input) => {
                 return {
@@ -61,6 +50,9 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.form = this.selected; // Присваиваем значение из геттера в свойство myData
     },
     methods: {
         ...mapActions(['getTypes']),
@@ -82,11 +74,12 @@ export default {
             this.wasValidated = true;
         },
         submitForm(){
+
             this.validated();
 
             if (!Object.keys(this.errorsValidated).length){
                 const equipment = {
-                    equipment_type_id: this.form.type,
+                    equipment_type: this.form.type,
                     serial_number: this.form.number,
                     desc: this.form.desc,
                 }
@@ -100,6 +93,7 @@ export default {
             }
         }
     },
+
     mounted() {
         this.getTypes();
     },

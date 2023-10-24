@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <AppForm :item="item" @submit.prevent @submitForm="submitForm">
+                    <AppForm  @submit.prevent @submitForm="submitForm">
                         <slot>Обновить</slot>
                     </AppForm>
                 </div>
@@ -18,7 +18,7 @@
 
 <script>
 import AppForm from "@/components/AppForm.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     components:{
@@ -30,7 +30,6 @@ export default {
         }
     },
     props: {
-        item: Object,
         editModal: Object,
     },
     methods: {
