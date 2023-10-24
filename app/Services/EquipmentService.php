@@ -8,7 +8,7 @@ use App\Models\Equipment;
 use App\Models\EquipmentType;
 use Illuminate\Support\Facades\Validator;
 
-class EquipmentServices
+class EquipmentService
 {
     public function index($q, $page, $perPage)
     {
