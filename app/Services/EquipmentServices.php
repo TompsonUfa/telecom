@@ -33,6 +33,7 @@ class EquipmentServices
 
     public function show($id){
         $equipment = Equipment::find($id);
+
         if($equipment){
             return new EquipmentResource($equipment);
         }
