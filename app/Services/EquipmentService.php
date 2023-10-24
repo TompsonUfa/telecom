@@ -39,7 +39,6 @@ class EquipmentService
     {
         $errors = null;
         $success = null;
-        dd($equipments);
         foreach ($equipments as $index => $equipment){
 
             $validator = Validator::make($equipment, [

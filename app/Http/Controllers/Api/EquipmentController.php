@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EquipmentCreateRequest;
 use App\Http\Requests\EquipmentRequest;
 use App\Http\Requests\FilterRequest;
 use App\Models\Equipment;
@@ -17,6 +18,7 @@ class EquipmentController extends Controller
         $q = $request->input('q');
         $page = $request->input('page');
         $perPage = $request->input('per_page');
+
         return $services->index($q, $page, $perPage);
     }
 
@@ -25,9 +27,9 @@ class EquipmentController extends Controller
         return $services->show($equipment);
     }
 
-    public function store(Request $request, EquipmentService $services)
+    public function store(EquipmentCreateRequest $request, EquipmentService $services)
     {
-        $equipments = $request->input('equipments', []);
+        $equipments = $request->input('equipments');
         return $services->store($equipments);
     }
 
