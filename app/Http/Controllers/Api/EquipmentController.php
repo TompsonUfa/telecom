@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EquipmentRequest;
+use App\Http\Requests\FilterRequest;
 use App\Models\Equipment;
 use App\Services\EquipmentService;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
-    public function index(Request $request, EquipmentService $services)
+    public function index(FilterRequest $request, EquipmentService $services)
     {
         $q = $request->input('q');
         $page = $request->input('page');
@@ -44,7 +45,7 @@ class EquipmentController extends Controller
         return $services->destroy($equipment);
     }
 
-    public function type(Request $request, EquipmentService $services)
+    public function type(FilterRequest $request, EquipmentService $services)
     {
         $q = $request->input('q');
         $page = $request->input('page');
