@@ -34,7 +34,7 @@ export default {
             axios
                 .post('/api/equipment', {"equipments": data})
                 .then(res => {
-                    ctx.commit('updateMessage', res.data)
+                   console.log(res)
                 })
                 .catch(err => {
                     console.log('error: ' + err)

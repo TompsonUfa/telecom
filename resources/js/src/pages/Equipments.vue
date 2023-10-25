@@ -15,7 +15,7 @@
             <pagination-equipment></pagination-equipment>
         </div>
     </div>
-    <modal-edit :editModal="editModal" ></modal-edit>
+    <modal-edit v-if="select" :editModal="editModal" ></modal-edit>
 </template>
 
 <script>

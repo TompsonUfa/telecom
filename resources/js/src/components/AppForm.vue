@@ -40,6 +40,16 @@ export default {
             },
         }
     },
+    watch:{
+      selected (){
+            if(this.selected){
+                this.form.id = this.selected.id;
+                this.form.type = this.selected.equipment_type;
+                this.form.number = this.selected.serial_number;
+                this.form.desc = this.selected.desc;
+            }
+      }
+    },
     computed: {
         ...mapGetters(['types', 'selected']),
         validatedClass(){
@@ -55,7 +65,7 @@ export default {
         this.form = this.selected; // Присваиваем значение из геттера в свойство myData
     },
     methods: {
-        ...mapActions(['getTypes']),
+        ...mapActions(['getTypes', 'select']),
         validated(){
             this.errorsValidated.type = [];
             this.errorsValidated.number = [];
@@ -86,10 +96,12 @@ export default {
 
                 this.$emit('submitForm', equipment , this.form.id ? this.form.id : null);
 
+                this.select(null);
                 this.form.type = "";
                 this.form.number = "";
                 this.form.desc = "";
                 this.wasValidated = false;
+
             }
         }
     },
