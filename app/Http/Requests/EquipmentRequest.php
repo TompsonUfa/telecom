@@ -22,14 +22,13 @@ class EquipmentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('id');
-
+        $equipment = $this->route('equipment');
         return [
             'equipment_type_id' => ['required', 'exists:equipment_types,id'],
             'serial_number' => [
                 'required',
                 'string',
-                Rule::unique('equipment', 'serial_number')->ignore($id),
+                Rule::unique('equipment', 'serial_number')->ignore($equipment->id),
                 ],
             'desc' => ['nullable', 'string'],
         ];

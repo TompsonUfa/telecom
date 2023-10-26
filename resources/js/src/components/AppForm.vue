@@ -62,7 +62,7 @@ export default {
         }
     },
     created() {
-        this.form = this.selected; // Присваиваем значение из геттера в свойство myData
+        this.form = this.selected;
     },
     methods: {
         ...mapActions(['getTypes', 'select']),

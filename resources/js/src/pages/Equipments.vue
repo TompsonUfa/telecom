@@ -15,7 +15,7 @@
             <pagination-equipment></pagination-equipment>
         </div>
     </div>
-    <modal-edit v-if="select" :editModal="editModal" ></modal-edit>
+    <modal-edit :editModal="editModal" ></modal-edit>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ import TableEquipment from "@/components/TableEquipment.vue";
 import PaginationEquipment from "@/components/PaginationEquipment.vue";
 import FormSearch from "@/components/FormSearch.vue";
 import ModalEdit from "@/components/ModalEdit.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import { Modal } from 'bootstrap'
 
 export default {
@@ -39,8 +39,11 @@ export default {
             editModal: null,
         }
     },
+    computed: {
+        ...mapGetters(['selected'])
+    },
     methods: {
-        ...mapActions(['getEquipments', 'select']),
+        ...mapActions(['getEquipments','select']),
         showModalEdit(item){
             this.select(item);
             this.editModal.toggle();
