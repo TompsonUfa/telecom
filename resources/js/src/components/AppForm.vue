@@ -61,9 +61,6 @@ export default {
             }
         }
     },
-    created() {
-        this.form = this.selected;
-    },
     methods: {
         ...mapActions(['getTypes', 'select']),
         validated(){
@@ -84,7 +81,6 @@ export default {
             this.wasValidated = true;
         },
         submitForm(){
-
             this.validated();
 
             if (!Object.keys(this.errorsValidated).length){
