@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\EquipmentType;
+use App\Rules\EquipmentNumberValidation;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,12 +25,13 @@ class EquipmentRequest extends FormRequest
     public function rules(): array
     {
         $equipment = $this->route('equipment');
+        $mask = EquipmentType::find($equipment['equipment_type_id'])->value('mask');
         return [
             'equipment_type_id' => ['required', 'exists:equipment_types,id'],
             'serial_number' => [
                 'required',
-                'string',
-                Rule::unique('equipment', 'serial_number')->ignore($equipment->id),
+                 new EquipmentNumberValidation($mask),
+                 Rule::unique('equipment', 'serial_number')->ignore($equipment->id),
                 ],
             'desc' => ['nullable', 'string'],
         ];
