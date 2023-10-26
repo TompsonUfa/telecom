@@ -6,7 +6,9 @@ use App\Http\Resources\Equipment\EquipmentResource;
 use App\Http\Resources\Equipment\EquipmentTypeResource;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
+use App\Rules\EquipmentNumberValidation;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class EquipmentService
 {
@@ -41,9 +43,11 @@ class EquipmentService
         $success = null;
         foreach ($equipments as $index => $equipment){
 
+            $mask = EquipmentType::find($equipment['equipment_type_id'])->value('mask');
+
             $validator = Validator::make($equipment, [
                 'equipment_type_id' => ['required', 'exists:equipment_types,id'],
-                'serial_number' => ['required', 'string', 'unique:equipment'],
+                'serial_number' => ['required', 'unique:equipment', new EquipmentNumberValidation($mask)],
                 'desc' => ['nullable', 'string'],
             ]);
 
