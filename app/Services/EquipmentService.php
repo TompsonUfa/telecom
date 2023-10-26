@@ -28,9 +28,7 @@ class EquipmentService
                 });
         }
 
-        $equipments = $equipments->paginate($perPage, ['*'], 'page', $page);
-
-        return EquipmentResource::collection($equipments);
+        return $equipments->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function show($equipment){
@@ -81,9 +79,7 @@ class EquipmentService
                 'desc' => $desc,
             ]);
 
-            $equipment = $equipment->fresh();
-
-            return new EquipmentResource($equipment);
+            return $equipment->fresh();
     }
 
     public function destroy($equipment){
@@ -101,8 +97,7 @@ class EquipmentService
                 ->orWhere('mask', 'like', "%{$q}%");
         }
 
-        $equipmentsTypes = $equipmentsTypes->paginate($perPage, ['*'], 'page', $page);
+        return $equipmentsTypes->paginate($perPage, ['*'], 'page', $page);
 
-        return EquipmentTypeResource::collection($equipmentsTypes);
     }
 }

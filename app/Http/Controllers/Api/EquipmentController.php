@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EquipmentCreateRequest;
 use App\Http\Requests\EquipmentRequest;
 use App\Http\Requests\FilterRequest;
+use App\Http\Resources\Equipment\EquipmentResource;
+use App\Http\Resources\Equipment\EquipmentTypeResource;
 use App\Models\Equipment;
 use App\Services\EquipmentService;
 use Illuminate\Http\Request;
@@ -19,7 +21,9 @@ class EquipmentController extends Controller
         $page = $request->input('page');
         $perPage = $request->input('per_page');
 
-        return $services->index($q, $page, $perPage);
+        $equipments = $services->index($q, $page, $perPage);
+
+        return EquipmentResource::collection($equipments);
     }
 
     public function show(Equipment $equipment, EquipmentService $services)
@@ -38,8 +42,9 @@ class EquipmentController extends Controller
         $equipmentTypeId = $request->input('equipment_type_id');
         $serialNumber = $request->input('serial_number');
         $desc = $request->input('desc');
+        $equipment = $services->update($equipment, $equipmentTypeId, $serialNumber, $desc);
 
-        return $services->update($equipment, $equipmentTypeId, $serialNumber, $desc);
+        return new EquipmentResource($equipment);
     }
 
     public function destroy(Equipment $equipment, EquipmentService $services)
@@ -53,6 +58,8 @@ class EquipmentController extends Controller
         $page = $request->input('page');
         $perPage = $request->input('per_page');
 
-        return $services->type($q, $page, $perPage);
+        $equipmentsTypes = $services->type($q, $page, $perPage);
+
+        return EquipmentTypeResource::collection($equipmentsTypes);
     }
 }
