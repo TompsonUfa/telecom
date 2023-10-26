@@ -22,7 +22,7 @@ class EquipmentFactory extends Factory
     {
         return [
             'equipment_type_id' => EquipmentType::get()->random()->id,
-            'serial_number' => fake()->unique()->text(10),
+            'serial_number' => fake()->unique()->text(),
             'desc' => fake()->text(),
         ];
     }

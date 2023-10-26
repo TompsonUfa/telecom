@@ -20,8 +20,8 @@ class EquipmentTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->text(40),
-            'mask' => fake()->regexify('[NAaX0-9Z@_\-]{10}'),
+            'name' => fake()->text(40),
+            'mask' => substr(str_shuffle('NAaXZNAaXZNAaXZNAaXZNAaXZ'), 0, 10),
         ];
     }
 }

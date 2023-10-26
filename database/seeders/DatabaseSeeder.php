@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+
         EquipmentType::factory(20)->create();
 
-        Equipment::factory(10)->create();
+        //Equipment::factory(10)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
